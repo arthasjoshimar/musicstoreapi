@@ -14,6 +14,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MusicStoreDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    
+    //Con esto desactivamos el changeTracker para todo el objeto DBcontext.
+    //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 var app = builder.Build();
