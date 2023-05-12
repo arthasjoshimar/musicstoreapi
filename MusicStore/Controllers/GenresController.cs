@@ -62,6 +62,7 @@ public class GenresController: ControllerBase
             var entity = await _context.Set<Genre>()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == id);
+
             if(entity == null)
             {
                 response.Success = false;
