@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using MusicStore.DataAccess;
 using MusicStore.Entities;
+using MusicStore.Repositories;
+using MusicStoreServices;
+using MusicStoreServices.Profiles;
 using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +21,13 @@ builder.Services.AddDbContext<MusicStoreDbContext>(options =>
     //Con esto desactivamos el changeTracker para todo el objeto DBcontext.
     //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
+
+builder.Services.AddAutoMapper( config =>
+{
+    config.AddProfile<GenreProfile>();
+});
+builder.Services.AddTransient<IGenreRepository, GenreRepository>();
+builder.Services.AddTransient<IGenreService, GenreService>();
 
 var app = builder.Build();
 
